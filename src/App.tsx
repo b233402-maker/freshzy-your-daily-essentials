@@ -20,6 +20,16 @@ import OrderDetail from "./pages/dashboard/OrderDetail";
 import UserProfile from "./pages/dashboard/UserProfile";
 import SavedAddresses from "./pages/dashboard/SavedAddresses";
 
+// Owner Dashboard
+import OwnerDashboardLayout from "./pages/owner/OwnerDashboardLayout";
+import OwnerDashboard from "./pages/owner/OwnerDashboard";
+import QueueManagement from "./pages/owner/QueueManagement";
+import OrdersManagement from "./pages/owner/OrdersManagement";
+import ServicesManagement from "./pages/owner/ServicesManagement";
+import OwnerAnalytics from "./pages/owner/OwnerAnalytics";
+import CustomersPage from "./pages/owner/CustomersPage";
+import OwnerSettings from "./pages/owner/OwnerSettings";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -46,6 +56,17 @@ const App = () => (
             <Route path="orders/:orderId" element={<OrderDetail />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="addresses" element={<SavedAddresses />} />
+          </Route>
+
+          {/* Owner Dashboard Routes */}
+          <Route path="/owner" element={<OwnerDashboardLayout />}>
+            <Route index element={<OwnerDashboard />} />
+            <Route path="queue" element={<QueueManagement />} />
+            <Route path="orders" element={<OrdersManagement />} />
+            <Route path="services" element={<ServicesManagement />} />
+            <Route path="analytics" element={<OwnerAnalytics />} />
+            <Route path="customers" element={<CustomersPage />} />
+            <Route path="settings" element={<OwnerSettings />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />
