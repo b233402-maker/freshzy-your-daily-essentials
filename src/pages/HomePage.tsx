@@ -400,23 +400,57 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Earn Section */}
-      <section className="section-padding bg-secondary text-secondary-foreground">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-block px-4 py-2 rounded-full bg-white/20 text-sm font-medium mb-6">
-              🏍️ রাইডার হন
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Freshzy-র সাথে আয় করুন
-            </h2>
-            <p className="text-lg text-secondary-foreground/90 mb-8">
-              লন্ড্রি পিকআপ ও ডেলিভারি রাইডার হিসেবে যোগ দিন। 
-              নিজের সময়মতো কাজ করুন, ভালো আয় করুন।
-            </p>
+      {/* Rider Section - Premium Design */}
+      <section className="section-padding relative overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-warning/10 via-transparent to-transparent" />
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-warning/10 rounded-full blur-3xl" />
+        
+        <div className="container-custom relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-warning/20 border border-warning/30 text-warning text-sm font-medium mb-6 animate-fade-in">
+                <span className="w-2 h-2 rounded-full bg-warning animate-pulse" />
+                এখনই সুযোগ নিন
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 animate-fade-in">
+                রাইডার হয়ে{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-warning to-orange-400">
+                  আয় করুন
+                </span>
+              </h2>
+              
+              <p className="text-lg text-slate-300 mb-8 max-w-lg animate-fade-in">
+                Freshzy-র সাথে লন্ড্রি পিকআপ ও ডেলিভারি রাইডার হিসেবে যোগ দিন। 
+                নিজের সময়মতো কাজ করুন, সাপ্তাহিক পেমেন্ট পান।
+              </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild variant="glass" size="lg">
+              {/* Stats Row */}
+              <div className="flex flex-wrap gap-6 mb-8 animate-fade-in">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-warning">৳২৫,০০০+</p>
+                  <p className="text-sm text-slate-400">গড় মাসিক আয়</p>
+                </div>
+                <div className="w-px h-12 bg-slate-700" />
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-white">৫০০+</p>
+                  <p className="text-sm text-slate-400">সক্রিয় রাইডার</p>
+                </div>
+                <div className="w-px h-12 bg-slate-700" />
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-success">৪.৮★</p>
+                  <p className="text-sm text-slate-400">রাইডার রেটিং</p>
+                </div>
+              </div>
+
+              <Button asChild size="lg" className="bg-gradient-to-r from-warning to-orange-500 hover:from-warning/90 hover:to-orange-500/90 text-slate-900 font-semibold shadow-lg shadow-warning/25 animate-fade-in">
                 <Link to="/become-rider">
                   রাইডার হিসেবে যোগ দিন
                   <ArrowRight className="w-5 h-5" />
@@ -424,22 +458,57 @@ const HomePage = () => {
               </Button>
             </div>
 
-            {/* Rider Benefits */}
-            <div className="grid sm:grid-cols-3 gap-6 mt-12">
-              <div className="p-6 rounded-2xl bg-white/10">
-                <div className="text-4xl mb-4">💰</div>
-                <h4 className="font-semibold mb-2">সাপ্তাহিক পেমেন্ট</h4>
-                <p className="text-sm text-secondary-foreground/80">প্রতি সপ্তাহে পেমেন্ট পান</p>
+            {/* Right - Benefits Cards */}
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                {/* Card 1 */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-warning/30 transition-all duration-300 hover:bg-white/10 animate-fade-in">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-warning/20 to-warning/5 flex items-center justify-center mb-4">
+                    <svg className="w-7 h-7 text-warning" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">সাপ্তাহিক পেমেন্ট</h4>
+                  <p className="text-sm text-slate-400">প্রতি সপ্তাহে সরাসরি আপনার অ্যাকাউন্টে</p>
+                </div>
+
+                {/* Card 2 */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-primary/30 transition-all duration-300 hover:bg-white/10 animate-fade-in delay-100">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4">
+                    <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">ফ্লেক্সিবল সময়</h4>
+                  <p className="text-sm text-slate-400">নিজের সুবিধামতো সময়ে কাজ করুন</p>
+                </div>
+
+                {/* Card 3 */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-success/30 transition-all duration-300 hover:bg-white/10 animate-fade-in delay-200">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center mb-4">
+                    <svg className="w-7 h-7 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">বোনাস ও ইন্সেন্টিভ</h4>
+                  <p className="text-sm text-slate-400">এক্সট্রা ডেলিভারিতে বোনাস আয়</p>
+                </div>
+
+                {/* Card 4 */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-accent/30 transition-all duration-300 hover:bg-white/10 animate-fade-in delay-300">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-4">
+                    <svg className="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-semibold text-white mb-2">ইনস্যুরেন্স কভার</h4>
+                  <p className="text-sm text-slate-400">রাইডারদের জন্য সুরক্ষা বীমা</p>
+                </div>
               </div>
-              <div className="p-6 rounded-2xl bg-white/10">
-                <div className="text-4xl mb-4">⏰</div>
-                <h4 className="font-semibold mb-2">ফ্লেক্সিবল সময়</h4>
-                <p className="text-sm text-secondary-foreground/80">নিজের সুবিধামতো কাজ করুন</p>
-              </div>
-              <div className="p-6 rounded-2xl bg-white/10">
-                <div className="text-4xl mb-4">📈</div>
-                <h4 className="font-semibold mb-2">বোনাস আয়</h4>
-                <p className="text-sm text-secondary-foreground/80">এক্সট্রা বোনাস ও ইন্সেন্টিভ</p>
+
+              {/* Floating Badge */}
+              <div className="absolute -top-4 -right-4 bg-gradient-to-r from-warning to-orange-500 text-slate-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-fade-in">
+                🔥 এখনই যোগ দিন
               </div>
             </div>
           </div>
