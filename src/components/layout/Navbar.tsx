@@ -9,6 +9,7 @@ import {
   User, 
   LayoutDashboard, 
   ShoppingBag, 
+  ShoppingCart,
   MapPinned, 
   Settings, 
   LogOut,
@@ -32,6 +33,7 @@ import { navItems } from '@/data/dummyData';
 import { userProfile } from '@/data/orderData';
 import { riderProfile } from '@/data/riderData';
 import { ownerVendor } from '@/data/ownerData';
+import { useCart } from '@/contexts/CartContext';
 import freshzyLogo from '@/assets/freshzy-logo.png';
 
 // Simulating user roles - in real app this would come from auth context
@@ -45,6 +47,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentRole, setCurrentRole] = useState<UserRole>('customer');
   const location = useLocation();
+  const { itemCount } = useCart();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -123,6 +126,19 @@ const Navbar = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
+            {/* Cart Icon */}
+            <Link 
+              to="/cart" 
+              className="relative p-2 rounded-lg hover:bg-muted transition-colors"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs font-bold rounded-full flex items-center justify-center">
+                  {itemCount > 9 ? '9+' : itemCount}
+                </span>
+              )}
+            </Link>
+
             {/* Phone - Desktop */}
             <a
               href="tel:+8801712345678"
