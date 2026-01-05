@@ -30,6 +30,16 @@ import OwnerAnalytics from "./pages/owner/OwnerAnalytics";
 import CustomersPage from "./pages/owner/CustomersPage";
 import OwnerSettings from "./pages/owner/OwnerSettings";
 
+// Rider Dashboard
+import RiderDashboardLayout from "./pages/rider/RiderDashboardLayout";
+import RiderDashboard from "./pages/rider/RiderDashboard";
+import ActiveDeliveries from "./pages/rider/ActiveDeliveries";
+import RouteMap from "./pages/rider/RouteMap";
+import RiderEarnings from "./pages/rider/RiderEarnings";
+import DeliveryHistory from "./pages/rider/DeliveryHistory";
+import RiderRatings from "./pages/rider/RiderRatings";
+import RiderSettings from "./pages/rider/RiderSettings";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -67,6 +77,17 @@ const App = () => (
             <Route path="analytics" element={<OwnerAnalytics />} />
             <Route path="customers" element={<CustomersPage />} />
             <Route path="settings" element={<OwnerSettings />} />
+          </Route>
+
+          {/* Rider Dashboard Routes */}
+          <Route path="/rider" element={<RiderDashboardLayout />}>
+            <Route index element={<RiderDashboard />} />
+            <Route path="deliveries" element={<ActiveDeliveries />} />
+            <Route path="route" element={<RouteMap />} />
+            <Route path="earnings" element={<RiderEarnings />} />
+            <Route path="history" element={<DeliveryHistory />} />
+            <Route path="ratings" element={<RiderRatings />} />
+            <Route path="settings" element={<RiderSettings />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />
