@@ -31,189 +31,175 @@ const HomePage = () => {
         
         {/* Content */}
         <div className="container-custom relative z-10 py-16 md:py-24">
-          <div className="max-w-3xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm mb-6 animate-fade-in">
-              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              বাংলাদেশের ১ নম্বর সার্ভিস প্ল্যাটফর্ম
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in">
-              আপনার কাছের সেরা{' '}
-              <span className="text-warning">সেলুন</span> ও{' '}
-              <span className="text-warning">লন্ড্রি</span>{' '}
-              সার্ভিস
-            </h1>
-
-            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-xl animate-fade-in delay-100">
-              ঘরে বসে সেলুন অ্যাপয়েন্টমেন্ট নিন অথবা লন্ড্রি পিকআপ-ডেলিভারি বুক করুন। 
-              সবকিছু এক অ্যাপে!
-            </p>
-
-            {/* Search Box */}
-            <div className="bg-white rounded-2xl p-2 shadow-elevated max-w-2xl animate-fade-in delay-200">
-              <div className="flex flex-col sm:flex-row gap-2">
-                {/* Location */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b sm:border-b-0 sm:border-r border-border">
-                  <MapPin className="w-5 h-5 text-primary" />
-                  <input
-                    type="text"
-                    placeholder="আপনার লোকেশন"
-                    className="bg-transparent outline-none text-foreground placeholder:text-muted-foreground w-full sm:w-32"
-                    defaultValue="ঢাকা"
-                  />
-                </div>
-                
-                {/* Search */}
-                <div className="flex-1 flex items-center gap-2 px-4 py-3">
-                  <Search className="w-5 h-5 text-muted-foreground" />
-                  <input
-                    type="text"
-                    placeholder="সেলুন বা লন্ড্রি খুঁজুন..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-transparent outline-none text-foreground placeholder:text-muted-foreground w-full"
-                  />
-                </div>
-                
-                <Button variant="hero" size="lg" className="shrink-0">
-                  <Search className="w-5 h-5" />
-                  খুঁজুন
-                </Button>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm mb-6 animate-fade-in">
+                <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                বাংলাদেশের ১ নম্বর সার্ভিস প্ল্যাটফর্ম
               </div>
-            </div>
 
-            {/* Quick Stats */}
-            <div className="flex flex-wrap gap-6 mt-8 animate-fade-in delay-300">
-              <div className="flex items-center gap-2 text-white">
-                <Users className="w-5 h-5" />
-                <span>{platformStats.totalUsers} ইউজার</span>
-              </div>
-              <div className="flex items-center gap-2 text-white">
-                <Star className="w-5 h-5" />
-                <span>{platformStats.totalVendors} সার্ভিস প্রোভাইডার</span>
-              </div>
-              <div className="flex items-center gap-2 text-white">
-                <CheckCircle className="w-5 h-5" />
-                <span>{platformStats.totalOrders} অর্ডার সম্পন্ন</span>
-              </div>
-            </div>
-          </div>
+              {/* Headline */}
+              <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in">
+                আপনার কাছের সেরা{' '}
+                <span className="text-warning">সেলুন</span> ও{' '}
+                <span className="text-warning">লন্ড্রি</span>{' '}
+                সার্ভিস
+              </h1>
 
-          {/* Decorative Right Side - Service Architecture */}
-          <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 w-[400px]">
-            {/* Floating Service Cards */}
-            <div className="relative">
-              {/* Main Map Card */}
-              <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-2xl animate-fade-in">
-                {/* Map Header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">আপনার এলাকায়</p>
-                    <p className="text-white/70 text-sm">১৫+ সার্ভিস প্রোভাইডার</p>
-                  </div>
-                </div>
-                
-                {/* Abstract Map Grid */}
-                <div className="relative h-48 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 overflow-hidden">
-                  {/* Grid Lines */}
-                  <div className="absolute inset-0 opacity-20">
-                    {[...Array(6)].map((_, i) => (
-                      <div key={`h-${i}`} className="absolute w-full h-px bg-white" style={{ top: `${(i + 1) * 16.66}%` }} />
-                    ))}
-                    {[...Array(6)].map((_, i) => (
-                      <div key={`v-${i}`} className="absolute h-full w-px bg-white" style={{ left: `${(i + 1) * 16.66}%` }} />
-                    ))}
+              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-xl animate-fade-in delay-100">
+                ঘরে বসে সেলুন অ্যাপয়েন্টমেন্ট নিন অথবা লন্ড্রি পিকআপ-ডেলিভারি বুক করুন। 
+                সবকিছু এক প্ল্যাটফর্মে!
+              </p>
+
+              {/* Search Box */}
+              <div className="bg-white rounded-2xl p-2 shadow-elevated max-w-xl animate-fade-in delay-200">
+                <div className="flex flex-col sm:flex-row gap-2">
+                  {/* Location */}
+                  <div className="flex items-center gap-2 px-4 py-3 border-b sm:border-b-0 sm:border-r border-border">
+                    <MapPin className="w-5 h-5 text-primary" />
+                    <input
+                      type="text"
+                      placeholder="আপনার লোকেশন"
+                      className="bg-transparent outline-none text-foreground placeholder:text-muted-foreground w-full sm:w-28"
+                      defaultValue="ঢাকা"
+                    />
                   </div>
                   
-                  {/* Location Pins */}
-                  <div className="absolute top-6 left-8 animate-pulse">
-                    <div className="w-4 h-4 rounded-full bg-warning shadow-lg shadow-warning/50" />
-                    <div className="w-1 h-3 bg-warning mx-auto -mt-0.5 rounded-b" />
-                  </div>
-                  <div className="absolute top-12 right-12 animate-pulse delay-100">
-                    <div className="w-4 h-4 rounded-full bg-success shadow-lg shadow-success/50" />
-                    <div className="w-1 h-3 bg-success mx-auto -mt-0.5 rounded-b" />
-                  </div>
-                  <div className="absolute bottom-16 left-16 animate-pulse delay-200">
-                    <div className="w-4 h-4 rounded-full bg-primary-foreground shadow-lg shadow-white/30" />
-                    <div className="w-1 h-3 bg-primary-foreground mx-auto -mt-0.5 rounded-b" />
-                  </div>
-                  <div className="absolute bottom-8 right-20 animate-pulse delay-300">
-                    <div className="w-4 h-4 rounded-full bg-warning shadow-lg shadow-warning/50" />
-                    <div className="w-1 h-3 bg-warning mx-auto -mt-0.5 rounded-b" />
-                  </div>
-                  <div className="absolute top-20 left-1/2 animate-pulse delay-150">
-                    <div className="w-5 h-5 rounded-full bg-success shadow-lg shadow-success/50 ring-4 ring-success/30" />
-                    <div className="w-1.5 h-4 bg-success mx-auto -mt-0.5 rounded-b" />
+                  {/* Search */}
+                  <div className="flex-1 flex items-center gap-2 px-4 py-3">
+                    <Search className="w-5 h-5 text-muted-foreground" />
+                    <input
+                      type="text"
+                      placeholder="সেলুন বা লন্ড্রি খুঁজুন..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="bg-transparent outline-none text-foreground placeholder:text-muted-foreground w-full"
+                    />
                   </div>
                   
-                  {/* Center User Location */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-6 h-6 rounded-full bg-white shadow-xl flex items-center justify-center">
-                      <div className="w-3 h-3 rounded-full bg-primary animate-ping" />
-                    </div>
-                    <div className="absolute -inset-4 rounded-full border-2 border-white/30 animate-ping" />
-                  </div>
+                  <Button variant="hero" size="lg" className="shrink-0">
+                    <Search className="w-5 h-5" />
+                    খুঁজুন
+                  </Button>
                 </div>
               </div>
 
-              {/* Floating Salon Card */}
-              <div className="absolute -left-12 top-4 bg-white rounded-2xl p-4 shadow-elevated animate-fade-in delay-200 w-44">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center">
-                    <Scissors className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">সেলুন</p>
-                    <p className="text-xs text-muted-foreground">২৪৭+ সার্ভিস</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Laundry Card */}
-              <div className="absolute -right-8 bottom-12 bg-white rounded-2xl p-4 shadow-elevated animate-fade-in delay-300 w-44">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center">
-                    <Shirt className="w-6 h-6 text-secondary-foreground" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">লন্ড্রি</p>
-                    <p className="text-xs text-muted-foreground">১৫৩+ সার্ভিস</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Rating Badge */}
-              <div className="absolute -left-4 bottom-24 bg-white/20 backdrop-blur-lg rounded-full px-4 py-2 border border-white/30 animate-fade-in delay-400">
+              {/* Quick Stats */}
+              <div className="flex flex-wrap gap-6 mt-8 animate-fade-in delay-300">
                 <div className="flex items-center gap-2 text-white">
-                  <Star className="w-4 h-4 fill-warning text-warning" />
-                  <span className="font-medium text-sm">৪.৯ রেটিং</span>
+                  <Users className="w-5 h-5" />
+                  <span>{platformStats.totalUsers} ইউজার</span>
+                </div>
+                <div className="flex items-center gap-2 text-white">
+                  <Star className="w-5 h-5" />
+                  <span>{platformStats.totalVendors} সার্ভিস প্রোভাইডার</span>
+                </div>
+                <div className="flex items-center gap-2 text-white">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>{platformStats.totalOrders} অর্ডার সম্পন্ন</span>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Mobile App Preview - Coming Soon */}
-          {/* TODO: Uncomment when ready to show mobile app preview
-          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-80">
-            <div className="relative">
-              <div className="w-64 h-[500px] bg-white/10 backdrop-blur-lg rounded-[3rem] border border-white/20 p-4 mx-auto">
-                <div className="w-full h-full bg-foreground/20 rounded-[2.5rem] flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="text-6xl mb-4">📱</div>
-                    <p className="font-medium">মোবাইল অ্যাপ</p>
-                    <p className="text-sm opacity-80">শীঘ্রই আসছে</p>
+            {/* Decorative Right Side - Service Architecture */}
+            <div className="hidden lg:block relative">
+              {/* Floating Service Cards */}
+              <div className="relative">
+                {/* Main Map Card */}
+                <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-2xl animate-fade-in">
+                  {/* Map Header */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                      <MapPin className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">আপনার এলাকায়</p>
+                      <p className="text-white/70 text-sm">১৫+ সার্ভিস প্রোভাইডার</p>
+                    </div>
+                  </div>
+                  
+                  {/* Abstract Map Grid */}
+                  <div className="relative h-48 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 overflow-hidden">
+                    {/* Grid Lines */}
+                    <div className="absolute inset-0 opacity-20">
+                      {[...Array(6)].map((_, i) => (
+                        <div key={`h-${i}`} className="absolute w-full h-px bg-white" style={{ top: `${(i + 1) * 16.66}%` }} />
+                      ))}
+                      {[...Array(6)].map((_, i) => (
+                        <div key={`v-${i}`} className="absolute h-full w-px bg-white" style={{ left: `${(i + 1) * 16.66}%` }} />
+                      ))}
+                    </div>
+                    
+                    {/* Location Pins */}
+                    <div className="absolute top-6 left-8 animate-pulse">
+                      <div className="w-4 h-4 rounded-full bg-warning shadow-lg shadow-warning/50" />
+                      <div className="w-1 h-3 bg-warning mx-auto -mt-0.5 rounded-b" />
+                    </div>
+                    <div className="absolute top-12 right-12 animate-pulse delay-100">
+                      <div className="w-4 h-4 rounded-full bg-success shadow-lg shadow-success/50" />
+                      <div className="w-1 h-3 bg-success mx-auto -mt-0.5 rounded-b" />
+                    </div>
+                    <div className="absolute bottom-16 left-16 animate-pulse delay-200">
+                      <div className="w-4 h-4 rounded-full bg-primary-foreground shadow-lg shadow-white/30" />
+                      <div className="w-1 h-3 bg-primary-foreground mx-auto -mt-0.5 rounded-b" />
+                    </div>
+                    <div className="absolute bottom-8 right-20 animate-pulse delay-300">
+                      <div className="w-4 h-4 rounded-full bg-warning shadow-lg shadow-warning/50" />
+                      <div className="w-1 h-3 bg-warning mx-auto -mt-0.5 rounded-b" />
+                    </div>
+                    <div className="absolute top-20 left-1/2 animate-pulse delay-150">
+                      <div className="w-5 h-5 rounded-full bg-success shadow-lg shadow-success/50 ring-4 ring-success/30" />
+                      <div className="w-1.5 h-4 bg-success mx-auto -mt-0.5 rounded-b" />
+                    </div>
+                    
+                    {/* Center User Location */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-6 h-6 rounded-full bg-white shadow-xl flex items-center justify-center">
+                        <div className="w-3 h-3 rounded-full bg-primary animate-ping" />
+                      </div>
+                      <div className="absolute -inset-4 rounded-full border-2 border-white/30 animate-ping" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Salon Card */}
+                <div className="absolute -left-8 top-4 bg-white rounded-2xl p-4 shadow-elevated animate-fade-in delay-200 w-40">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center">
+                      <Scissors className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground text-sm">সেলুন</p>
+                      <p className="text-xs text-muted-foreground">২৪৭+</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Laundry Card */}
+                <div className="absolute -right-4 bottom-8 bg-white rounded-2xl p-4 shadow-elevated animate-fade-in delay-300 w-40">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center">
+                      <Shirt className="w-5 h-5 text-secondary-foreground" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground text-sm">লন্ড্রি</p>
+                      <p className="text-xs text-muted-foreground">১৫৩+</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Rating Badge */}
+                <div className="absolute left-0 bottom-20 bg-white/20 backdrop-blur-lg rounded-full px-4 py-2 border border-white/30 animate-fade-in delay-400">
+                  <div className="flex items-center gap-2 text-white">
+                    <Star className="w-4 h-4 fill-warning text-warning" />
+                    <span className="font-medium text-sm">৪.৯ রেটিং</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          */}
         </div>
       </section>
 
