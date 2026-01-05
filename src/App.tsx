@@ -3,10 +3,14 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CartProvider } from "@/contexts/CartContext";
 import MainLayout from "./components/layout/MainLayout";
 import HomePage from "./pages/HomePage";
 import VendorsPage from "./pages/VendorsPage";
 import VendorDetailPage from "./pages/VendorDetailPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import BecomePartnerPage from "./pages/BecomePartnerPage";
 import BecomeRiderPage from "./pages/BecomeRiderPage";
 import AboutPage from "./pages/AboutPage";
@@ -60,28 +64,32 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/vendors" element={<VendorsPage />} />
-            <Route path="/vendor/:id" element={<VendorDetailPage />} />
-            <Route path="/become-partner" element={<BecomePartnerPage />} />
-            <Route path="/become-rider" element={<BecomeRiderPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/help" element={<HelpCenterPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/refund" element={<RefundPage />} />
-          </Route>
-          
-          {/* User Dashboard Routes */}
-          <Route path="/dashboard" element={<UserDashboardLayout />}>
+    <CartProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/vendors" element={<VendorsPage />} />
+              <Route path="/vendor/:id" element={<VendorDetailPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/order-confirmation/:orderId" element={<OrderConfirmationPage />} />
+              <Route path="/become-partner" element={<BecomePartnerPage />} />
+              <Route path="/become-rider" element={<BecomeRiderPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/help" element={<HelpCenterPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/refund" element={<RefundPage />} />
+            </Route>
+            
+            {/* User Dashboard Routes */}
+            <Route path="/dashboard" element={<UserDashboardLayout />}>
             <Route index element={<DashboardOverview />} />
             <Route path="orders/active" element={<ActiveOrders />} />
             <Route path="orders/history" element={<OrderHistory />} />
@@ -122,10 +130,11 @@ const App = () => (
             <Route path="settings" element={<AdminSettings />} />
           </Route>
           
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </CartProvider>
   </QueryClientProvider>
 );
 

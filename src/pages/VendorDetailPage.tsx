@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   Star, Clock, MapPin, Phone, ChevronLeft, Heart, Share2, 
   Users, AlertCircle, Plus, Minus, ShoppingCart, Info,
@@ -8,14 +8,25 @@ import {
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ServiceCard from '@/components/cards/ServiceCard';
-import { vendors, salonServices, laundryServices, reviews, CartItem, Service } from '@/data/dummyData';
+import { vendors, salonServices, laundryServices, reviews, Service } from '@/data/dummyData';
+import { useCart } from '@/contexts/CartContext';
 
 const VendorDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const vendor = vendors.find(v => v.id === id) || vendors[0];
   const services = vendor.type === 'salon' ? salonServices : laundryServices;
   
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const { 
+    items: cart, 
+    addItem, 
+    removeItem, 
+    getItemQuantity, 
+    subtotal: cartTotal, 
+    itemCount: cartItemCount,
+    vendorId: currentVendorId
+  } = useCart();
+  
   const [activeCategory, setActiveCategory] = useState('all');
 
   const categories = ['all', ...new Set(services.map(s => s.category))];
@@ -25,39 +36,23 @@ const VendorDetailPage = () => {
     : services.filter(s => s.category === activeCategory);
 
   const addToCart = (service: Service) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.id === service.id);
-      if (existing) {
-        return prev.map(item => 
-          item.id === service.id 
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prev, { ...service, quantity: 1, vendorId: vendor.id }];
-    });
+    addItem(service, vendor.id);
   };
 
   const removeFromCart = (serviceId: string) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.id === serviceId);
-      if (existing && existing.quantity > 1) {
-        return prev.map(item =>
-          item.id === serviceId
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        );
-      }
-      return prev.filter(item => item.id !== serviceId);
-    });
+    removeItem(serviceId);
   };
 
   const getQuantity = (serviceId: string) => {
-    return cart.find(item => item.id === serviceId)?.quantity || 0;
+    return getItemQuantity(serviceId);
   };
 
-  const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const handleCheckout = () => {
+    navigate('/cart');
+  };
+
+  // Show items only from this vendor
+  const vendorCart = currentVendorId === vendor.id ? cart : [];
 
   return (
     <div className="min-h-screen bg-muted/30 pb-32 md:pb-0">
@@ -415,7 +410,7 @@ const VendorDetailPage = () => {
                 )}
               </h3>
 
-              {cart.length === 0 ? (
+              {vendorCart.length === 0 ? (
                 <div className="text-center py-8">
                   <ShoppingCart className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
                   <p className="text-muted-foreground">আপনার কার্ট খালি</p>
@@ -424,7 +419,7 @@ const VendorDetailPage = () => {
               ) : (
                 <>
                   <div className="space-y-3 max-h-64 overflow-y-auto">
-                    {cart.map((item) => (
+                    {vendorCart.map((item) => (
                       <div key={item.id} className="flex items-center justify-between p-3 bg-muted rounded-xl">
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium text-sm truncate">{item.name}</h4>
@@ -454,7 +449,7 @@ const VendorDetailPage = () => {
                       <span className="font-medium">মোট</span>
                       <span className="text-xl font-bold text-primary">৳{cartTotal}</span>
                     </div>
-                    <Button className="w-full" size="lg">
+                    <Button className="w-full" size="lg" onClick={handleCheckout}>
                       {vendor.type === 'salon' ? 'বুকিং করুন' : 'অর্ডার করুন'}
                     </Button>
                     <p className="text-xs text-center text-muted-foreground mt-2">
@@ -472,7 +467,7 @@ const VendorDetailPage = () => {
       </div>
 
       {/* Mobile Cart Bar */}
-      {cart.length > 0 && (
+      {vendorCart.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border p-4 lg:hidden z-50">
           <div className="container-custom">
             <div className="flex items-center justify-between">
@@ -480,7 +475,7 @@ const VendorDetailPage = () => {
                 <p className="font-medium">{cartItemCount} আইটেম</p>
                 <p className="text-xl font-bold text-primary">৳{cartTotal}</p>
               </div>
-              <Button size="lg">
+              <Button size="lg" onClick={handleCheckout}>
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 {vendor.type === 'salon' ? 'বুকিং করুন' : 'অর্ডার করুন'}
               </Button>
