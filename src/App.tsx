@@ -40,6 +40,15 @@ import DeliveryHistory from "./pages/rider/DeliveryHistory";
 import RiderRatings from "./pages/rider/RiderRatings";
 import RiderSettings from "./pages/rider/RiderSettings";
 
+// Admin Dashboard
+import AdminDashboardLayout from "./pages/admin/AdminDashboardLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import UsersManagement from "./pages/admin/UsersManagement";
+import VendorsManagement from "./pages/admin/VendorsManagement";
+import RidersManagement from "./pages/admin/RidersManagement";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminSettings from "./pages/admin/AdminSettings";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -88,6 +97,16 @@ const App = () => (
             <Route path="history" element={<DeliveryHistory />} />
             <Route path="ratings" element={<RiderRatings />} />
             <Route path="settings" element={<RiderSettings />} />
+          </Route>
+
+          {/* Admin Dashboard Routes */}
+          <Route path="/admin" element={<AdminDashboardLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="users" element={<UsersManagement />} />
+            <Route path="vendors" element={<VendorsManagement />} />
+            <Route path="riders" element={<RidersManagement />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
+            <Route path="settings" element={<AdminSettings />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />

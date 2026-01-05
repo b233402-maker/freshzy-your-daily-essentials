@@ -13,7 +13,8 @@ import {
   Settings, 
   LogOut,
   Bike,
-  Store
+  Store,
+  Shield
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -34,7 +35,7 @@ import { ownerVendor } from '@/data/ownerData';
 import freshzyLogo from '@/assets/freshzy-logo.png';
 
 // Simulating user roles - in real app this would come from auth context
-type UserRole = 'customer' | 'rider' | 'owner';
+type UserRole = 'customer' | 'rider' | 'owner' | 'admin';
 
 
 const Navbar = () => {
@@ -62,6 +63,8 @@ const Navbar = () => {
         return { name: riderProfile.name, avatar: riderProfile.avatar, email: riderProfile.email };
       case 'owner':
         return { name: ownerVendor.name, avatar: ownerVendor.image, email: ownerVendor.phone };
+      case 'admin':
+        return { name: 'সুপার অ্যাডমিন', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150', email: 'admin@freshzy.com' };
       default:
         return { name: userProfile.name, avatar: userProfile.avatar, email: userProfile.email };
     }
@@ -73,6 +76,8 @@ const Navbar = () => {
         return '/rider';
       case 'owner':
         return '/owner';
+      case 'admin':
+        return '/admin';
       default:
         return '/dashboard';
     }
@@ -141,8 +146,8 @@ const Navbar = () => {
                     <span className="hidden md:inline text-sm font-medium max-w-[100px] truncate">
                       {profile.name.split(' ')[0]}
                     </span>
-                    <Badge variant="outline" className="hidden md:flex text-xs capitalize">
-                      {currentRole === 'customer' ? 'গ্রাহক' : currentRole === 'rider' ? 'রাইডার' : 'মালিক'}
+                    <Badge variant="outline" className={`hidden md:flex text-xs capitalize ${currentRole === 'admin' ? 'bg-gradient-to-r from-primary to-purple-600 text-white border-0' : ''}`}>
+                      {currentRole === 'customer' ? 'গ্রাহক' : currentRole === 'rider' ? 'রাইডার' : currentRole === 'owner' ? 'মালিক' : 'অ্যাডমিন'}
                     </Badge>
                     <ChevronDown className="h-4 w-4 text-muted-foreground" />
                   </Button>
@@ -186,6 +191,14 @@ const Navbar = () => {
                       <Store className="mr-2 h-4 w-4" />
                       <span>মালিক অ্যাকাউন্ট</span>
                       {currentRole === 'owner' && <Badge className="ml-auto" variant="secondary">সক্রিয়</Badge>}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => switchRole('admin')}
+                      className={`cursor-pointer ${currentRole === 'admin' ? 'bg-primary/10' : ''}`}
+                    >
+                      <Shield className="mr-2 h-4 w-4" />
+                      <span>অ্যাডমিন অ্যাকাউন্ট</span>
+                      {currentRole === 'admin' && <Badge className="ml-auto" variant="secondary">সক্রিয়</Badge>}
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   
@@ -297,39 +310,48 @@ const Navbar = () => {
                       <p className="font-medium text-sm">{profile.name}</p>
                       <p className="text-xs text-muted-foreground">{profile.email}</p>
                     </div>
-                    <Badge variant="outline" className="text-xs capitalize">
-                      {currentRole === 'customer' ? 'গ্রাহক' : currentRole === 'rider' ? 'রাইডার' : 'মালিক'}
+                    <Badge variant="outline" className={`text-xs capitalize ${currentRole === 'admin' ? 'bg-gradient-to-r from-primary to-purple-600 text-white border-0' : ''}`}>
+                      {currentRole === 'customer' ? 'গ্রাহক' : currentRole === 'rider' ? 'রাইডার' : currentRole === 'owner' ? 'মালিক' : 'অ্যাডমিন'}
                     </Badge>
                   </div>
 
                   {/* Role Switcher - Mobile */}
-                  <div className="flex gap-2 mb-3 px-1">
+                  <div className="grid grid-cols-4 gap-1 mb-3 px-1">
                     <Button 
                       variant={currentRole === 'customer' ? 'default' : 'outline'} 
                       size="sm" 
-                      className="flex-1"
+                      className="flex-col h-auto py-2 px-1"
                       onClick={() => switchRole('customer')}
                     >
-                      <User className="w-4 h-4 mr-1" />
-                      গ্রাহক
+                      <User className="w-4 h-4 mb-1" />
+                      <span className="text-xs">গ্রাহক</span>
                     </Button>
                     <Button 
                       variant={currentRole === 'rider' ? 'default' : 'outline'} 
                       size="sm" 
-                      className="flex-1"
+                      className="flex-col h-auto py-2 px-1"
                       onClick={() => switchRole('rider')}
                     >
-                      <Bike className="w-4 h-4 mr-1" />
-                      রাইডার
+                      <Bike className="w-4 h-4 mb-1" />
+                      <span className="text-xs">রাইডার</span>
                     </Button>
                     <Button 
                       variant={currentRole === 'owner' ? 'default' : 'outline'} 
                       size="sm" 
-                      className="flex-1"
+                      className="flex-col h-auto py-2 px-1"
                       onClick={() => switchRole('owner')}
                     >
-                      <Store className="w-4 h-4 mr-1" />
-                      মালিক
+                      <Store className="w-4 h-4 mb-1" />
+                      <span className="text-xs">মালিক</span>
+                    </Button>
+                    <Button 
+                      variant={currentRole === 'admin' ? 'default' : 'outline'} 
+                      size="sm" 
+                      className="flex-col h-auto py-2 px-1"
+                      onClick={() => switchRole('admin')}
+                    >
+                      <Shield className="w-4 h-4 mb-1" />
+                      <span className="text-xs">অ্যাডমিন</span>
                     </Button>
                   </div>
 
