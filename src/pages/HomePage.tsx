@@ -31,9 +31,9 @@ const HomePage = () => {
         
         {/* Content */}
         <div className="container-custom relative z-10 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div>
+          <div className="grid lg:grid-cols-5 gap-8 items-center">
+            {/* Left Content - 2 columns */}
+            <div className="lg:col-span-2">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm mb-6 animate-fade-in">
                 <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
@@ -103,12 +103,12 @@ const HomePage = () => {
               </div>
             </div>
 
-            {/* Decorative Right Side - Service Architecture */}
-            <div className="hidden lg:block relative">
+            {/* Decorative Right Side - Service Architecture - 3 columns */}
+            <div className="hidden lg:block lg:col-span-3 relative">
               {/* Floating Service Cards */}
-              <div className="relative">
+              <div className="relative max-w-sm ml-auto">
                 {/* Main Map Card */}
-                <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-2xl animate-fade-in">
+                <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-5 border border-white/20 shadow-2xl animate-fade-in">
                   {/* Map Header */}
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
