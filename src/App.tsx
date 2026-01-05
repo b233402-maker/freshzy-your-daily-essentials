@@ -9,6 +9,13 @@ import VendorsPage from "./pages/VendorsPage";
 import VendorDetailPage from "./pages/VendorDetailPage";
 import BecomePartnerPage from "./pages/BecomePartnerPage";
 import BecomeRiderPage from "./pages/BecomeRiderPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import FAQPage from "./pages/FAQPage";
+import HelpCenterPage from "./pages/HelpCenterPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import TermsPage from "./pages/TermsPage";
+import RefundPage from "./pages/RefundPage";
 import NotFound from "./pages/NotFound";
 
 // User Dashboard
@@ -64,7 +71,13 @@ const App = () => (
             <Route path="/vendor/:id" element={<VendorDetailPage />} />
             <Route path="/become-partner" element={<BecomePartnerPage />} />
             <Route path="/become-rider" element={<BecomeRiderPage />} />
-            <Route path="/help" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/help" element={<HelpCenterPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/refund" element={<RefundPage />} />
           </Route>
           
           {/* User Dashboard Routes */}
