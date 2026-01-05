@@ -1,8 +1,9 @@
-import { Menu, Bell, Search, Shield } from 'lucide-react';
+import { Menu, Search, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import NotificationCenter from '@/components/notifications/NotificationCenter';
 
 interface AdminHeaderProps {
   onMenuClick: () => void;
@@ -47,12 +48,7 @@ const AdminHeader = ({ onMenuClick, title }: AdminHeaderProps) => {
           </Badge>
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-red-500">
-              5
-            </Badge>
-          </Button>
+          <NotificationCenter role="admin" />
 
           {/* Avatar */}
           <Avatar className="h-9 w-9 border-2 border-primary/20">

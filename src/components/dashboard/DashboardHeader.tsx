@@ -1,8 +1,9 @@
-import { Menu, Bell, Search } from 'lucide-react';
+import { Menu, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { userProfile } from '@/data/orderData';
+import NotificationCenter from '@/components/notifications/NotificationCenter';
 
 interface DashboardHeaderProps {
   onMenuClick: () => void;
@@ -39,10 +40,7 @@ const DashboardHeader = ({ onMenuClick, title }: DashboardHeaderProps) => {
 
         {/* Right Side */}
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <span className="absolute top-1 right-1 h-2 w-2 bg-secondary rounded-full" />
-          </Button>
+          <NotificationCenter role="customer" />
           
           <div className="flex items-center gap-3">
             <Avatar className="h-9 w-9 border-2 border-primary/20">
