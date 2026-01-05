@@ -102,6 +102,7 @@ const HomePage = () => {
           </div>
 
           {/* Mobile App Preview - Coming Soon */}
+          {/* TODO: Uncomment when ready to show mobile app preview
           <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-80">
             <div className="relative">
               <div className="w-64 h-[500px] bg-white/10 backdrop-blur-lg rounded-[3rem] border border-white/20 p-4 mx-auto">
@@ -115,6 +116,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+          */}
         </div>
       </section>
 
