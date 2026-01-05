@@ -1,10 +1,10 @@
-import { Menu, Bell, MapPin, Power } from 'lucide-react';
+import { Menu, MapPin, Power } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { riderProfile } from '@/data/riderData';
 import { useState } from 'react';
+import NotificationCenter from '@/components/notifications/NotificationCenter';
 
 interface RiderHeaderProps {
   onMenuClick: () => void;
@@ -52,12 +52,7 @@ const RiderHeader = ({ onMenuClick, title }: RiderHeaderProps) => {
           </div>
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
-              2
-            </Badge>
-          </Button>
+          <NotificationCenter role="rider" />
 
           {/* Avatar */}
           <Avatar className="h-9 w-9">

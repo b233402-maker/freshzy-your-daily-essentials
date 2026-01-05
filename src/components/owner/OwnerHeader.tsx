@@ -1,10 +1,10 @@
-import { Menu, Bell, Search, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Menu, Search, ToggleLeft, ToggleRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { useState } from 'react';
 import { ownerVendor } from '@/data/ownerData';
 import { cn } from '@/lib/utils';
+import NotificationCenter from '@/components/notifications/NotificationCenter';
 
 interface OwnerHeaderProps {
   onMenuClick: () => void;
@@ -77,12 +77,7 @@ const OwnerHeader = ({ onMenuClick, title }: OwnerHeaderProps) => {
           </Button>
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center bg-secondary text-secondary-foreground text-xs">
-              3
-            </Badge>
-          </Button>
+          <NotificationCenter role="owner" />
         </div>
       </div>
     </header>
